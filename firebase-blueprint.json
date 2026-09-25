@@ -1,0 +1,163 @@
+{
+  "entities": {
+    "Empresa": {
+      "title": "Empresa",
+      "description": "Dados cadastrais da empresa cliente do sistema SST",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "razaoSocial": { "type": "string", "maxLength": 200 },
+        "nomeFantasia": { "type": "string", "maxLength": 200 },
+        "cnpj": { "type": "string", "maxLength": 25 },
+        "cnae": { "type": "string", "maxLength": 20 },
+        "grauDeRisco": { "type": "number" },
+        "endereco": { "type": "string", "maxLength": 250 },
+        "cidade": { "type": "string", "maxLength": 100 },
+        "uf": { "type": "string", "maxLength": 5 },
+        "cep": { "type": "string", "maxLength": 20 },
+        "telefone": { "type": "string", "maxLength": 30 },
+        "responsavelSST": { "type": "string", "maxLength": 150 },
+        "registroProfissional": { "type": "string", "maxLength": 100 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "razaoSocial", "cnpj"]
+    },
+    "Colaborador": {
+      "title": "Colaborador",
+      "description": "Ficha do trabalhador para emissão de ASO, treinamentos e controle de EPI",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "nome": { "type": "string", "maxLength": 150 },
+        "cpf": { "type": "string", "maxLength": 20 },
+        "rg": { "type": "string", "maxLength": 20 },
+        "dataNascimento": { "type": "string", "maxLength": 20 },
+        "cargo": { "type": "string", "maxLength": 100 },
+        "setor": { "type": "string", "maxLength": 100 },
+        "dataAdmissao": { "type": "string", "maxLength": 20 },
+        "matricula": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["id", "nome", "cpf", "cargo", "setor"]
+    },
+    "Treinamento": {
+      "title": "Treinamento",
+      "description": "Registro de capacitação NR com emissão de certificados oficiais",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "nrCodigo": { "type": "string", "maxLength": 50 },
+        "titulo": { "type": "string", "maxLength": 200 },
+        "tipo": { "type": "string", "maxLength": 50 },
+        "modalidade": { "type": "string", "maxLength": 50 },
+        "cargaHorariaHoras": { "type": "number" },
+        "instrutorNome": { "type": "string", "maxLength": 150 },
+        "instrutorRegistro": { "type": "string", "maxLength": 150 },
+        "responsavelTecnico": { "type": "string", "maxLength": 150 },
+        "dataInicio": { "type": "string", "maxLength": 30 },
+        "dataFim": { "type": "string", "maxLength": 30 },
+        "validadeMeses": { "type": "number" },
+        "status": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["id", "nrCodigo", "titulo", "instrutorNome", "dataInicio"]
+    },
+    "CAT": {
+      "title": "CAT",
+      "description": "Comunicação de Acidente de Trabalho para o eSocial",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "numeroCat": { "type": "string", "maxLength": 60 },
+        "tipoCat": { "type": "string", "maxLength": 50 },
+        "colaboradorNome": { "type": "string", "maxLength": 150 },
+        "colaboradorCpf": { "type": "string", "maxLength": 20 },
+        "cargo": { "type": "string", "maxLength": 100 },
+        "setor": { "type": "string", "maxLength": 100 },
+        "dataAcidente": { "type": "string", "maxLength": 30 },
+        "tipoAcidente": { "type": "string", "maxLength": 50 },
+        "descricaoAcidente": { "type": "string", "maxLength": 1000 },
+        "statusEsocial": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["id", "numeroCat", "colaboradorNome", "dataAcidente"]
+    },
+    "FichaEPI": {
+      "title": "FichaEPI",
+      "description": "Ficha de entrega e termo de responsabilidade de EPI (NR-06)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "colaboradorId": { "type": "string", "maxLength": 128 },
+        "colaboradorNome": { "type": "string", "maxLength": 150 },
+        "cpf": { "type": "string", "maxLength": 20 },
+        "cargo": { "type": "string", "maxLength": 100 },
+        "setor": { "type": "string", "maxLength": 100 },
+        "termoCienciaAceito": { "type": "boolean" },
+        "dataAssinaturaTermo": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["id", "colaboradorId", "colaboradorNome"]
+    },
+    "Extintor": {
+      "title": "Extintor",
+      "description": "Inspeção e checklist de extintor de incêndio (NR-23)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "codigo": { "type": "string", "maxLength": 50 },
+        "tipo": { "type": "string", "maxLength": 50 },
+        "capacidade": { "type": "string", "maxLength": 50 },
+        "localizacao": { "type": "string", "maxLength": 150 },
+        "dataUltimaInspecao": { "type": "string", "maxLength": 30 },
+        "dataVencimentoCarga": { "type": "string", "maxLength": 30 },
+        "status": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "codigo", "tipo", "localizacao"]
+    },
+    "ASO": {
+      "title": "ASO",
+      "description": "Atestado de Saúde Ocupacional (NR-07)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "numeroAso": { "type": "string", "maxLength": 50 },
+        "tipoAso": { "type": "string", "maxLength": 50 },
+        "colaboradorNome": { "type": "string", "maxLength": 150 },
+        "cpf": { "type": "string", "maxLength": 20 },
+        "cargo": { "type": "string", "maxLength": 100 },
+        "conclusao": { "type": "string", "maxLength": 50 },
+        "dataEmissao": { "type": "string", "maxLength": 30 },
+        "medicoCoordenador": { "type": "string", "maxLength": 150 }
+      },
+      "required": ["id", "numeroAso", "colaboradorNome", "conclusao"]
+    }
+  },
+  "firestore": {
+    "/empresa/{empresaId}": {
+      "schema": "Empresa",
+      "description": "Documentos com as configurações e dados da empresa cliente"
+    },
+    "/colaboradores/{colaboradorId}": {
+      "schema": "Colaborador",
+      "description": "Coleção de colaboradores ativos e histórico da empresa"
+    },
+    "/treinamentos/{treinamentoId}": {
+      "schema": "Treinamento",
+      "description": "Turmas de treinamentos NRs e emissão de certificados"
+    },
+    "/cats/{catId}": {
+      "schema": "CAT",
+      "description": "Registros de Comunicação de Acidente de Trabalho"
+    },
+    "/fichas_epi/{fichaId}": {
+      "schema": "FichaEPI",
+      "description": "Fichas de controle de entrega de EPI assinadas"
+    },
+    "/extintores/{extintorId}": {
+      "schema": "Extintor",
+      "description": "Controle e inspeções de extintores de combate a incêndio"
+    },
+    "/asos/{asoId}": {
+      "schema": "ASO",
+      "description": "Atestados de Saúde Ocupacional"
+    }
+  }
+}

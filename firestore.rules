@@ -1,0 +1,99 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'robsondesignergrafico@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Admins collection
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Connection test collection
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+
+    // Empresa Configuration
+    match /empresa/{empresaId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isAdmin();
+    }
+
+    // Colaboradores
+    match /colaboradores/{colaboradorId} {
+      allow read: if true;
+      allow create, update: if (isSignedIn() || true) && isValidId(colaboradorId);
+      allow delete: if isSignedIn() || isAdmin();
+    }
+
+    // Treinamentos e Certificados
+    match /treinamentos/{treinamentoId} {
+      allow read: if true;
+      allow create, update: if (isSignedIn() || true) && isValidId(treinamentoId);
+      allow delete: if isSignedIn() || isAdmin();
+    }
+
+    // CATs
+    match /cats/{catId} {
+      allow read: if true;
+      allow create, update: if (isSignedIn() || true) && isValidId(catId);
+      allow delete: if isSignedIn() || isAdmin();
+    }
+
+    // Fichas de EPI
+    match /fichas_epi/{fichaId} {
+      allow read: if true;
+      allow create, update: if (isSignedIn() || true) && isValidId(fichaId);
+      allow delete: if isSignedIn() || isAdmin();
+    }
+
+    // Extintores
+    match /extintores/{extintorId} {
+      allow read: if true;
+      allow create, update: if (isSignedIn() || true) && isValidId(extintorId);
+      allow delete: if isSignedIn() || isAdmin();
+    }
+
+    // ASOs
+    match /asos/{asoId} {
+      allow read: if true;
+      allow create, update: if (isSignedIn() || true) && isValidId(asoId);
+      allow delete: if isSignedIn() || isAdmin();
+    }
+
+    // DDS Registros
+    match /dds_registros/{registroId} {
+      allow read: if true;
+      allow create, update: if (isSignedIn() || true) && isValidId(registroId);
+      allow delete: if isSignedIn() || isAdmin();
+    }
+
+    // Checklists
+    match /checklists/{checklistId} {
+      allow read: if true;
+      allow create, update: if (isSignedIn() || true) && isValidId(checklistId);
+      allow delete: if isSignedIn() || isAdmin();
+    }
+  }
+}

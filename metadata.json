@@ -1,0 +1,6 @@
+{
+  "name": "CONSULPREV SST - Gestão de Segurança e Saúde no Trabalho",
+  "description": "Sistema integrado de Gestão em Segurança do Trabalho: NRs, Emissão de CAT, LTCAT, PCMSO, ASO, GRO/PGR, APR, Checklist de Extintores (NR-23), Ficha de EPI (NR-06), DDS e PWA Móvel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
